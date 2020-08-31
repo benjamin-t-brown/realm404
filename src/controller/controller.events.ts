@@ -106,7 +106,7 @@ const G_controller_initEvents = () => {
     102: RIGHT,
     103: UP_LEFT,
     104: UP,
-    105: RIGHT,
+    105: UP_RIGHT,
   };
 
   window.addEventListener('keydown', ev => {
