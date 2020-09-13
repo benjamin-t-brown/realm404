@@ -24,7 +24,6 @@ let model_drawTargetingLine = false;
 let model_selectedInventoryItemIndex = -1;
 let model_handleTargetSelected: ((x: number, y: number) => void) | null = null;
 let model_targetType: TargetArea | null = null;
-let model_logs: string[] = [];
 let model_cutsceneVisible: boolean;
 let model_cutsceneLine: string = '';
 let model_cutsceneSprite: string = '';

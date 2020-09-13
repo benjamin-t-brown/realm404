@@ -102,7 +102,7 @@ const G_ITEM_GOLD_SM: Item = [
   13,
   'Gold S',
   {
-    onAcq: onGetRandomGold(5, 10),
+    onAcq: onGetRandomGold(1, 5),
   },
   0,
 ];
@@ -110,7 +110,7 @@ const G_ITEM_GOLD_MD: Item = [
   13,
   'Gold M',
   {
-    onAcq: onGetRandomGold(10, 20),
+    onAcq: onGetRandomGold(5, 10),
   },
   1,
 ];
@@ -118,7 +118,7 @@ const G_ITEM_GOLD_LG: Item = [
   13,
   'Gold L',
   {
-    onAcq: onGetRandomGold(20, 30),
+    onAcq: onGetRandomGold(10, 15),
   },
   1,
 ];
@@ -165,7 +165,7 @@ const G_ITEM_KNIFE: Item = [
   {
     getDmg: () => [4, 8],
   },
-  5,
+  1,
 ];
 const G_ITEM_SWORD: Item = [
   3,
@@ -173,7 +173,7 @@ const G_ITEM_SWORD: Item = [
   {
     getDmg: () => [8, 16],
   },
-  10,
+  5,
 ];
 const G_ITEM_FINE_SWORD: Item = [
   3,
@@ -181,15 +181,15 @@ const G_ITEM_FINE_SWORD: Item = [
   {
     getDmg: () => [16, 24],
   },
-  50,
+  15,
 ];
 const G_ITEM_MAGIC_SWORD: Item = [
   4,
   'Magic Sword',
   {
-    getDmg: () => [24, 32],
+    getDmg: () => [30, 55],
   },
-  100,
+  404,
 ];
 
 // const G_ITEM_BOW: Item = [
@@ -243,7 +243,7 @@ const G_ITEM_SCROLL_COMBUST: Item = [
       );
     },
   },
-  65,
+  25,
 ];
 const G_ITEM_SCROLL_FIREBALL: Item = [
   6,
@@ -317,7 +317,7 @@ const G_ITEM_POTION: Item = [
     async onUse(user: Actor) {
       G_model_statsModifyHp(
         G_model_actorGetStats(user),
-        G_utils_randInRange(10, 15)
+        G_utils_randInRange(5, 15)
       );
       return true;
     },
@@ -389,7 +389,7 @@ const G_ENEMY_MINOR_GOLEM: EnemyDefinition = [
   hp(6),
   G_BEHAVIOR_RAND,
 ];
-const G_ENEMY_GOLEM: EnemyDefinition = [4, 1, 'G', hp(14), G_BEHAVIOR_RAND];
+const G_ENEMY_GOLEM: EnemyDefinition = [4, 1, 'g', hp(14), G_BEHAVIOR_RAND];
 const G_ENEMY_CASTER: EnemyDefinition = [6, 1, 'C', hp(17), G_BEHAVIOR_RAND];
 // const G_ENEMY_ARCHER: EnemyDefinition = [
 //   8,
@@ -401,8 +401,8 @@ const G_ENEMY_CASTER: EnemyDefinition = [6, 1, 'C', hp(17), G_BEHAVIOR_RAND];
 const G_ENEMY_MAJOR_GOLEM: EnemyDefinition = [
   10,
   1,
-  'MG',
-  hp(38),
+  'G',
+  hp(32),
   G_BEHAVIOR_RAND,
 ];
 // const G_ENEMY_MERCHANT: EnemyDefinition = [
@@ -423,13 +423,13 @@ const G_SPAWN_LVL1: SpawnDefinition[] = [
 const G_SPAWN_LVL2: SpawnDefinition[] = [
   [G_ENEMY_MINOR_GOLEM, 0, 2, 12, G_ITEM_SWORD],
   [G_ENEMY_GOLEM, 2, 6, 10, G_ITEM_KNIFE],
-  [G_ENEMY_CASTER, 1, 4, 4, G_ITEM_KNIFE],
+  [G_ENEMY_CASTER, 1, 4, 4, G_ITEM_FINE_SWORD],
   // [G_ENEMY_ARCHER, 1, 4, 12, G_ITEM_FINE_SWORD],
   [G_ENEMY_MAJOR_GOLEM, 1, 2, 10, G_ITEM_SWORD],
 ];
 const G_SPAWN_LVL3: SpawnDefinition[] = [
   [G_ENEMY_GOLEM, 0, 2, 12, G_ITEM_SWORD],
-  [G_ENEMY_CASTER, 2, 5, 10, G_ITEM_KNIFE],
+  [G_ENEMY_CASTER, 2, 5, 10, G_ITEM_FINE_SWORD],
   // [G_ENEMY_ARCHER, 2, 5, 12, G_ITEM_FINE_SWORD],
   [G_ENEMY_MAJOR_GOLEM, 8, 10, 10, G_ITEM_SWORD],
 ];

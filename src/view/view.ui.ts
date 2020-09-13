@@ -272,10 +272,7 @@ const PickupItemsRow = (
     setStyle(canvas, { margin: '2px' });
     G_view_drawSprite(itemSprite, 0, 0, 2, ctx);
     setStyle(div, { 'justify-content': 'flex-start' });
-    const spanLetter = createElement(
-      'span',
-      `${String.fromCharCode(i + 65).toLowerCase()}.`
-    );
+    const spanLetter = createElement('span', `${'!@#$%^&*()_+'[i]}.`);
     const span = createElement(
       'span',
       `${itemName} ${amount > 1 ? '(' + amount + ')' : ''}`
@@ -386,10 +383,10 @@ const Cutscene = (world: World, parent: HTMLElement) => {
   if (!G_model_isCutsceneVisible()) {
     const help = createElement(
       DIV,
-      'NumPad/Arrows: move, Num5/Space: wait | Move into enemies to strike',
+      'NumPad/Arrows/QWEASDZXC: move, Num5/Space/S: wait | MOVE INTO ENEMIES TO STRIKE',
       {
-        position: 'fixed',
-        top: '5px',
+        position: 'absolute',
+        top: '-18px',
       }
     );
     appendChild(parent, help);

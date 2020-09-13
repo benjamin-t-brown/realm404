@@ -107,9 +107,19 @@ const G_controller_initEvents = () => {
     103: UP_LEFT,
     104: UP,
     105: UP_RIGHT,
+    81: UP_LEFT,
+    87: UP,
+    69: UP_RIGHT,
+    65: LEFT,
+    83: PAUSE,
+    68: RIGHT,
+    90: DOWN_LEFT,
+    88: DOWN,
+    67: DOWN_RIGHT,
   };
 
   window.addEventListener('keydown', ev => {
+    console.log('which', ev.which);
     const world = G_model_getCurrentWorld();
     if (G_model_isInputDisabled()) {
       return;
@@ -130,7 +140,8 @@ const G_controller_initEvents = () => {
 
     const { which } = ev;
     let key = KEY_MAP_TO_DIR[which] || which;
-
+    const actor = G_model_playerGetActor(world.player);
+    const room = G_model_worldGetCurrentRoom(world);
     switch (true) {
       case ((k: number) => k >= 1 && k <= 9)(Number(key)): // isDirection
         movePlayer(key as Direction);
@@ -143,12 +154,17 @@ const G_controller_initEvents = () => {
         G_view_renderUi();
         debounceRender(world);
         break;
+      case key === 192: // tilde
+        console.log('tilde');
+        const nearbyItemsAt = G_model_roomGetSurroundingItemsAt(room, actor);
+        const [item, x, y] = nearbyItemsAt[0] || [];
+        if (item) {
+          G_controller_acquireItem(item, actor, x, y, room);
+        }
+        break;
       default: {
-        const actor = G_model_playerGetActor(world.player);
-        const room = G_model_worldGetCurrentRoom(world);
-
         // number keys not including 0
-        if (key > 48 && key <= 57) {
+        if (!ev.shiftKey && key > 48 && key <= 57) {
           const i = key - 49;
           const inventory = G_model_actorGetInventory(actor);
           const item = inventory[i];
@@ -162,10 +178,10 @@ const G_controller_initEvents = () => {
             }
           }
         }
-        // letter keys a,b,c,d,e,f,g
-        if (key >= 65 && key <= 72) {
+        // letter keys !,@,#,$,%,^
+        if ((ev.shiftKey && key > 48 && key <= 57) || ev.which === 192) {
           const nearbyItemsAt = G_model_roomGetSurroundingItemsAt(room, actor);
-          const i = key - 65;
+          const i = key - 49;
           const [item, x, y] = nearbyItemsAt[i] || [];
           if (item) {
             G_controller_acquireItem(item, actor, x, y, room);
